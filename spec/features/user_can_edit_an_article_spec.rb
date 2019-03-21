@@ -15,11 +15,13 @@ describe "user can edit an article" do
       fill_in "article[body]", with: "Updated Body"
 # save_and_open_page
       click_on "Update Article"
-      # save_and_open_page
-      visit article_path(article_1)
+      expect(page).to have_content("Article Updated Title was updated.")
 
+      visit article_path(article_1)
+# save_and_open_page
       expect(page).to have_content("Updated Title")
       expect(page).to have_content("Updated Body")
+
     end
   end
 end
