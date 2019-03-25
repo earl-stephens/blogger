@@ -36,4 +36,21 @@ describe "user sees one article" do
       # expect(page).to have_content("Article for second article testing")
     end
   end
+
+  describe "they fill in the comment form" do
+    it "displays the comment on the article show page" do
+      article = Article.create!(title: "Newer Title", body: "Newer body")
+
+      visit article_path(article)
+
+      fill_in "comment[author_name]", with: "Me!"
+      fill_in "comment[body]", with: "So many thoughts on this article."
+      click_on "Submit"
+
+      expect(current_path).to eq(article_path(article))
+      expect(page).to have_content("Post a comment")
+      expect(page).to have_content("Me!")
+      expect(page).to have_content("So many thoughts on this article.")
+    end
+  end
 end
