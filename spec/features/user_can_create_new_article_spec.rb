@@ -13,11 +13,12 @@ describe "user can click on new article link" do
 
       fill_in "article[title]", with: "New Title!"
       fill_in "article[body]", with: "New Body!"
+      fill_in "article[tag_list]", with: "ruby, technology"
 
       click_on "Create Article"
       # save_and_open_page
       expect(page).to have_content("Article New Title! has been created.")
-
+      expect(page).to have_content("ruby technology")
       expect(page).to have_content("New Title!")
       expect(page).to have_content("New Body!")
     end
